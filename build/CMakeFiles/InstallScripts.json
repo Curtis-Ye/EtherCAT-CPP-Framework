@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

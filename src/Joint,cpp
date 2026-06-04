@@ -1,0 +1,223 @@
+#include "Joint.h"
+#include "config.h"
+
+extern ec_sync_info_t slave_0_syncs[];
+
+Joint::Joint(EtherCATMaster &master, uint16_t Pos)
+    : ethercat_(master), position_(Pos)
+{
+}
+
+bool Joint::init(uint8_t mode)
+{
+        if (ecrt_master_sdo_download(ethercat_, position_, 0x6060, 0x00, mode, sizeof(mode), NULL))
+        {
+                std::cout << "OD write unsuccessful" << std::endl;
+                return false;
+        }
+        if (ecrt_master_sdo_download(ethercat_, position_, 0x6040, 0x00, 0x80, sizeof(0x80), NULL))
+        {
+                std::cout << "OD write unsuccessful" << std::endl;
+                return false;
+        }
+}
+
+bool Joint::jointConfig()
+{
+        ec_slave_config_t *temp = slaveConfig(ethercat_, alias, position0, vendor_id, product_code);
+        sc_ = temp;
+        if (!sc_)
+                printf("Failed to get slave configuration\n");
+        return false;
+}
+
+bool Joint::PDOConfig()
+{
+#ifdef CONFIG_PDOS
+        if (ecrt_slave_config_pdos(sc_, EC_END, slave_0_syncs))
+        {
+                printf("Failed to configure slave PDOs\n");
+                return false;
+        }
+#endif
+        (void)sc_; /* 未定义 CONFIG_PDOS 时消除警告 */
+        return false;
+}
+
+void Joint::dcConfig()
+{
+        ecat_config_dc(sc_);
+}
+
+void Joint::getSlaveState()
+{
+        ecrt_slave_config_state(sc_, &slaveState_);
+}
+
+void Joint::appendPdoRegs(
+    std::vector<ec_pdo_entry_reg_t> &regs)
+{
+        regs.push_back({alias_,
+                        position_,
+                        vendor_id_,
+                        product_code_,
+                        0x6040,
+                        0x00,
+                        &offset_controlword_});
+        regs.push_back({alias_,
+                        position_,
+                        vendor_id_,
+                        product_code_,
+                        0x607a,
+                        0x00,
+                        &offset_target_position});
+        regs.push_back({alias_,
+                        position_,
+                        vendor_id_,
+                        product_code_,
+                        0x60FF,
+                        0x00,
+                        &offset_target_position});
+        regs.push_back({alias_,
+                        position_,
+                        vendor_id_,
+                        product_code_,
+                        0x6071,
+                        0x00,
+                        &offset_target_torque});
+        regs.push_back({alias_,
+                        position_,
+                        vendor_id_,
+                        product_code_,
+                        0x60B2,
+                        0x00,
+                        &offset_torque_offset});
+        regs.push_back({alias_,
+                        position_,
+                        vendor_id_,
+                        product_code_,
+                        0x6041,
+                        0x00,
+                        &offset_statusword});
+        regs.push_back({alias_,
+                        position_,
+                        vendor_id_,
+                        product_code_,
+                        0x6064,
+                        0x00,
+                        &offset_actual_position});
+        regs.push_back({alias_,
+                        position_,
+                        vendor_id_,
+                        product_code_,
+                        0x606c,
+                        0x00,
+                        &offset_actual_velocity});
+        regs.push_back({alias_,
+                        position_,
+                        vendor_id_,
+                        product_code_,
+                        0x6077,
+                        0x00,
+                        &offset_actual_torque});
+        regs.push_back({}); /* 终止 */
+}
+
+void Joint::getActualPos()
+{
+        actualPos = EC_READ_S32(ethercat_->getDomainPD() + offset_actual_position);
+}
+
+void Joint::getActualVel()
+{
+        actualVel = EC_READ_S32(ethercat_->getDomainPD() + offset_actual_velocity);
+}
+
+void Joint::getActualTor()
+{
+        actualTorque = EC_READ_S16(ethercat_->getDomainPD() + offset_actual_torque);
+}
+
+void Joint::getStatusWord()
+{
+        status_word_ = EC_READ_U16(ethercat_->getDomainPD() + offset_statusword);
+}
+
+bool Joint::isFault()
+{
+        return (status_word_ & 0x0008) == 0x0008;
+}
+
+bool Joint::isSwitchOnDisabled()
+{
+        return (status_word_ & 0x0040) == 0x0040;
+}
+
+bool Joint::isReadyToSwitchOn()
+{
+        return (status_word_ & 0x0021) == 0x0021;
+}
+
+bool Joint::isSwitchedOn()
+{
+        return (status_word_ & 0x0023) == 0x0023;
+}
+
+bool Joint::isOperationEnabled()
+{
+        return (status_word_ & 0x0027) == 0x0027;
+}
+
+void Joint::enable()
+{
+        if (isFault())
+        {
+                control_word_ = 0x0080;
+                std::cout << "Fault state, sending reset command" << endl;
+        }
+        else if (isSwitchOnDisabled())
+        {
+                control_word_ = 0x0006;
+                std::cout << "Switch on disabled, sending shutdown command" << endl;
+        }
+        else if (isReadyToSwitchOn())
+        {
+                control_word_ = 0x0007;
+                std::cout << "Ready to switch on, sending switch on command" << endl;
+        }
+        else if (isSwitchedOn())
+        {
+                control_word_ = 0x000F;
+                std::cout << "Switched on, sending enable operation command" << endl;
+        }
+        else if (isOperationEnabled())
+        {
+                control_word_ = 0x000F;
+                std::cout << "Operating..." << endl;
+        }
+        EC_WRITE_U16(ethercat_->getDomainPD() + offset_controlword, control_word_);
+}
+
+void Joint::setTargetPos(int32_t position)
+{
+        EC_WRITE_S32(ethercat_->getDomainPD() + offset_target_position, position);
+#ifdef SHOW_PARAM
+        std::cout << "TargetPos:" << position << endl;
+#endif
+}
+
+void Joint::setTargetVel(int32_t velocity)
+{
+        EC_WRITE_S32(ethercat_->getDomainPD() + offset_target_velocity, velocity);
+#ifdef SHOW_PARAM
+        std::cout << "TargetVel:" << velocity << endl;
+#endif
+}
+
+void Joint::setTargetTor(int32_t torque)
+{
+        EC_WRITE_S16(ethercat_->getDomainPD() + offset_target_torque, torque);
+#ifdef SHOW_PARAM
+        std::cout << "TargetTor:" << torque << endl;
+#endif
+}
