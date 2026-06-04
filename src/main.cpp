@@ -27,6 +27,15 @@ Joint joint1(master0, 0);
 RealtimeManager manager0(master0);
 std::vector<ec_pdo_entry_reg_t> regs;
 
+void signal_handler(int sig)
+{
+        (void)sig;
+        std::cout << "Releasing master..." << std::endl;
+        ecrt_release_master(master0.getMaster_());
+        pid_t pid = getpid();
+        kill(pid, SIGKILL);
+}
+
 int main(int argc, char **argv)
 {
     (void)argc;
@@ -39,7 +48,7 @@ int main(int argc, char **argv)
     manager0.set_realtime_priority();
     manager0.lock_memory();
     manager0.stack_prefault();
-    signal(SIGINT, manager0.signal_handler);
+    signal(SIGINT, signal_handler);
 
     /* ---- 2. EtherCAT 主站初始化 ---- */
 

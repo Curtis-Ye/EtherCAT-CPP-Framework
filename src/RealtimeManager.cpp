@@ -43,15 +43,6 @@ void RealtimeManager::stack_prefault()
         memset(dummy, 0, MAX_SAFE_STACK);
 }
 
-void RealtimeManager::signal_handler(int sig)
-{
-        (void)sig;
-        std::cout << "Releasing master..." << std::endl;
-        ecrt_release_master(ethercat_);
-        pid_t pid = getpid();
-        kill(pid, SIGKILL);
-}
-
 void RealtimeManager::timespec_add(struct timespec *result,
                                    struct timespec *time1,
                                    struct timespec *time2)
@@ -86,5 +77,5 @@ void RealtimeManager::timespec_sub(struct timespec *result,
 
 void RealtimeManager::nanoSleep(struct timespec *wakeupTime)
 {
-        clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &wakeupTime, NULL);
+        clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, wakeupTime, NULL);
 }

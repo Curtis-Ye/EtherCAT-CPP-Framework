@@ -1,7 +1,6 @@
 #include "Joint.h"
 #include "config.h"
-
-extern ec_sync_info_t slave_0_syncs[];
+#include "JointConfig.h"
 
 Joint::Joint(EtherCATMaster &master, uint16_t Pos)
     : ethercat_(master), position_(Pos)
@@ -10,21 +9,22 @@ Joint::Joint(EtherCATMaster &master, uint16_t Pos)
 
 bool Joint::init(uint8_t mode)
 {
-        if (ecrt_master_sdo_download(ethercat_, position_, 0x6060, 0x00, mode, sizeof(mode), NULL))
+        if (ecrt_master_sdo_download(ethercat_.getMaster_(), position_, 0x6060, 0x00, &mode, sizeof(mode), NULL))
         {
                 std::cout << "OD write unsuccessful" << std::endl;
                 return false;
         }
-        if (ecrt_master_sdo_download(ethercat_, position_, 0x6040, 0x00, 0x80, sizeof(0x80), NULL))
+        if (ecrt_master_sdo_download(ethercat_.getMaster_(), position_, 0x6040, 0x00, (uint8_t*)0x80, sizeof(0x80), NULL))
         {
                 std::cout << "OD write unsuccessful" << std::endl;
                 return false;
         }
+        return true;
 }
 
 bool Joint::jointConfig()
 {
-        ec_slave_config_t *temp = slaveConfig(ethercat_, alias, position0, vendor_id, product_code);
+        ec_slave_config_t *temp = ecrt_master_slave_config(ethercat_.getMaster_(), alias_, position_, vendor_id_, product_code_);
         sc_ = temp;
         if (!sc_)
                 std::cout << "Failed to get slave configuration" << std::endl;
@@ -46,7 +46,7 @@ bool Joint::PDOConfig()
 
 void Joint::dcConfig()
 {
-        ecat_config_dc(sc_);
+        ecrt_slave_config_dc(sc_, 0x0300, PERIOD_NS, SHIFT0, 0, 0);
 }
 
 void Joint::getSlaveState()
@@ -63,7 +63,7 @@ void Joint::appendPdoRegs(
                         product_code_,
                         0x6040,
                         0x00,
-                        &offset_controlword_});
+                        &offset_controlword});
         regs.push_back({alias_,
                         position_,
                         vendor_id_,
@@ -125,22 +125,22 @@ void Joint::appendPdoRegs(
 
 void Joint::getActualPos()
 {
-        actualPos = EC_READ_S32(ethercat_->getDomainPD() + offset_actual_position);
+        actualPos = EC_READ_S32(ethercat_.getDomainPD() + offset_actual_position);
 }
 
 void Joint::getActualVel()
 {
-        actualVel = EC_READ_S32(ethercat_->getDomainPD() + offset_actual_velocity);
+        actualVel = EC_READ_S32(ethercat_.getDomainPD() + offset_actual_velocity);
 }
 
 void Joint::getActualTor()
 {
-        actualTorque = EC_READ_S16(ethercat_->getDomainPD() + offset_actual_torque);
+        actualTorque = EC_READ_S16(ethercat_.getDomainPD() + offset_actual_torque);
 }
 
 void Joint::getStatusWord()
 {
-        status_word_ = EC_READ_U16(ethercat_->getDomainPD() + offset_statusword);
+        status_word_ = EC_READ_U16(ethercat_.getDomainPD() + offset_statusword);
 }
 
 bool Joint::isFault()
@@ -195,12 +195,12 @@ void Joint::enable()
                 control_word_ = 0x000F;
                 std::cout << "Operating..." << std::endl;
         }
-        EC_WRITE_U16(ethercat_->getDomainPD() + offset_controlword, control_word_);
+        EC_WRITE_U16(ethercat_.getDomainPD() + offset_controlword, control_word_);
 }
 
 void Joint::setTargetPos(int32_t position)
 {
-        EC_WRITE_S32(ethercat_->getDomainPD() + offset_target_position, position);
+        EC_WRITE_S32(ethercat_.getDomainPD() + offset_target_position, position);
 #ifdef SHOW_PARAM
         std::cout << "TargetPos:" << position << std::endl;
 #endif
@@ -208,7 +208,7 @@ void Joint::setTargetPos(int32_t position)
 
 void Joint::setTargetVel(int32_t velocity)
 {
-        EC_WRITE_S32(ethercat_->getDomainPD() + offset_target_velocity, velocity);
+        EC_WRITE_S32(ethercat_.getDomainPD() + offset_target_velocity, velocity);
 #ifdef SHOW_PARAM
         std::cout << "TargetVel:" << velocity << std::endl;
 #endif
@@ -216,7 +216,7 @@ void Joint::setTargetVel(int32_t velocity)
 
 void Joint::setTargetTor(int32_t torque)
 {
-        EC_WRITE_S16(ethercat_->getDomainPD() + offset_target_torque, torque);
+        EC_WRITE_S16(ethercat_.getDomainPD() + offset_target_torque, torque);
 #ifdef SHOW_PARAM
         std::cout << "TargetTor:" << torque << std::endl;
 #endif

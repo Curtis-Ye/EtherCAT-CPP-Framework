@@ -114,11 +114,41 @@ CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/curtis/EtherCAT-CPP-Framework/src/Joint.cpp -o CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.s
 
+CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o: CMakeFiles/EC_PROJECT.dir/flags.make
+CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o: /home/curtis/EtherCAT-CPP-Framework/src/RealtimeManager.cpp
+CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o: CMakeFiles/EC_PROJECT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o -MF CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o.d -o CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o -c /home/curtis/EtherCAT-CPP-Framework/src/RealtimeManager.cpp
+
+CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/curtis/EtherCAT-CPP-Framework/src/RealtimeManager.cpp > CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.i
+
+CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/curtis/EtherCAT-CPP-Framework/src/RealtimeManager.cpp -o CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.s
+
+CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o: CMakeFiles/EC_PROJECT.dir/flags.make
+CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o: /home/curtis/EtherCAT-CPP-Framework/src/JointConfig.cpp
+CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o: CMakeFiles/EC_PROJECT.dir/compiler_depend.ts
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -MD -MT CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o -MF CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o.d -o CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o -c /home/curtis/EtherCAT-CPP-Framework/src/JointConfig.cpp
+
+CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing CXX source to CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/curtis/EtherCAT-CPP-Framework/src/JointConfig.cpp > CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.i
+
+CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling CXX source to assembly CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/curtis/EtherCAT-CPP-Framework/src/JointConfig.cpp -o CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.s
+
 # Object files for target EC_PROJECT
 EC_PROJECT_OBJECTS = \
 "CMakeFiles/EC_PROJECT.dir/src/main.cpp.o" \
 "CMakeFiles/EC_PROJECT.dir/src/EtherCATMaster.cpp.o" \
-"CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.o"
+"CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.o" \
+"CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o" \
+"CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o"
 
 # External object files for target EC_PROJECT
 EC_PROJECT_EXTERNAL_OBJECTS =
@@ -126,10 +156,12 @@ EC_PROJECT_EXTERNAL_OBJECTS =
 EC_PROJECT: CMakeFiles/EC_PROJECT.dir/src/main.cpp.o
 EC_PROJECT: CMakeFiles/EC_PROJECT.dir/src/EtherCATMaster.cpp.o
 EC_PROJECT: CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.o
+EC_PROJECT: CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o
+EC_PROJECT: CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o
 EC_PROJECT: CMakeFiles/EC_PROJECT.dir/build.make
 EC_PROJECT: /usr/local/etherlab/lib/libethercat.so
 EC_PROJECT: CMakeFiles/EC_PROJECT.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable EC_PROJECT"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX executable EC_PROJECT"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/EC_PROJECT.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

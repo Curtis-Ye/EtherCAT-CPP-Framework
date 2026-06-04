@@ -177,6 +177,54 @@ src/Joint.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.s
 .PHONY : src/Joint.cpp.s
 
+src/JointConfig.o: src/JointConfig.cpp.o
+.PHONY : src/JointConfig.o
+
+# target to build an object file
+src/JointConfig.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o
+.PHONY : src/JointConfig.cpp.o
+
+src/JointConfig.i: src/JointConfig.cpp.i
+.PHONY : src/JointConfig.i
+
+# target to preprocess a source file
+src/JointConfig.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.i
+.PHONY : src/JointConfig.cpp.i
+
+src/JointConfig.s: src/JointConfig.cpp.s
+.PHONY : src/JointConfig.s
+
+# target to generate assembly for a file
+src/JointConfig.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.s
+.PHONY : src/JointConfig.cpp.s
+
+src/RealtimeManager.o: src/RealtimeManager.cpp.o
+.PHONY : src/RealtimeManager.o
+
+# target to build an object file
+src/RealtimeManager.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o
+.PHONY : src/RealtimeManager.cpp.o
+
+src/RealtimeManager.i: src/RealtimeManager.cpp.i
+.PHONY : src/RealtimeManager.i
+
+# target to preprocess a source file
+src/RealtimeManager.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.i
+.PHONY : src/RealtimeManager.cpp.i
+
+src/RealtimeManager.s: src/RealtimeManager.cpp.s
+.PHONY : src/RealtimeManager.s
+
+# target to generate assembly for a file
+src/RealtimeManager.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.s
+.PHONY : src/RealtimeManager.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -216,6 +264,12 @@ help:
 	@echo "... src/Joint.o"
 	@echo "... src/Joint.i"
 	@echo "... src/Joint.s"
+	@echo "... src/JointConfig.o"
+	@echo "... src/JointConfig.i"
+	@echo "... src/JointConfig.s"
+	@echo "... src/RealtimeManager.o"
+	@echo "... src/RealtimeManager.i"
+	@echo "... src/RealtimeManager.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

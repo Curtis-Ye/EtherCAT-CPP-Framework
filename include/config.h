@@ -33,3 +33,5 @@
 
 #define ENCODER_RES 524287        /* 电机一圈对应的编码器增量 (2^19-1) */
 #define MAX_SAFE_STACK (8 * 1024) /* 安全栈大小 */
+
+#define SHIFT0 (PERIOD_NS / 2)

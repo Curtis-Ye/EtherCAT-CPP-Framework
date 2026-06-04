@@ -10,6 +10,8 @@ set(CMAKE_DEPENDS_LANGUAGES
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
   "/home/curtis/EtherCAT-CPP-Framework/src/EtherCATMaster.cpp" "CMakeFiles/EC_PROJECT.dir/src/EtherCATMaster.cpp.o" "gcc" "CMakeFiles/EC_PROJECT.dir/src/EtherCATMaster.cpp.o.d"
   "/home/curtis/EtherCAT-CPP-Framework/src/Joint.cpp" "CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.o" "gcc" "CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.o.d"
+  "/home/curtis/EtherCAT-CPP-Framework/src/JointConfig.cpp" "CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o" "gcc" "CMakeFiles/EC_PROJECT.dir/src/JointConfig.cpp.o.d"
+  "/home/curtis/EtherCAT-CPP-Framework/src/RealtimeManager.cpp" "CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o" "gcc" "CMakeFiles/EC_PROJECT.dir/src/RealtimeManager.cpp.o.d"
   "/home/curtis/EtherCAT-CPP-Framework/src/main.cpp" "CMakeFiles/EC_PROJECT.dir/src/main.cpp.o" "gcc" "CMakeFiles/EC_PROJECT.dir/src/main.cpp.o.d"
   )
 

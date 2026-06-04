@@ -2,13 +2,13 @@
 
 bool EtherCATMaster::init()
 {
-        master_ = ecat_master_request();
+        master_ = ecrt_request_master(0);
         return master_ != nullptr;
 }
 
 bool EtherCATMaster::activate()
 {
-        if (ecat_activate(master_))
+        if (ecrt_master_activate(master_))
                 return false;
         return true;
 }
@@ -40,9 +40,10 @@ void EtherCATMaster::queueDomain()
 
 bool EtherCATMaster::getDomainData()
 {
-        domain_pd_ = ecat_domain_data(domain_);
+        domain_pd_ = ecrt_domain_data(domain_);
         if (!domain_pd_)
                 return false;
+        return true;
 }
 
 bool EtherCATMaster::regPDO2domain(const std::vector<ec_pdo_entry_reg_t> &domain_regs)
@@ -52,7 +53,7 @@ bool EtherCATMaster::regPDO2domain(const std::vector<ec_pdo_entry_reg_t> &domain
         return true;
 }
 
-void EtherCATMaster::syncDC();
+void EtherCATMaster::syncDC()
 {
 #ifdef SYNC_REF_TO_MASTER
         struct timespec time;
@@ -80,5 +81,5 @@ void EtherCATMaster::setMasterTime()
 {
         struct timespec masterInitTime;
         clock_gettime(CLOCK_MONOTONIC, &masterInitTime);
-        ecrt_master_application_time(master, TIMESPEC2NS(masterInitTime));
+        ecrt_master_application_time(master_, TIMESPEC2NS(masterInitTime));
 }

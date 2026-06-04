@@ -1,4 +1,4 @@
-#include <erct.h>
+#include "JointConfig.h"
 
 /* --- PDO 条目 (RxPDO + TxPDO) --- */
 ec_pdo_entry_info_t slave_0_pdo_entries[] = {

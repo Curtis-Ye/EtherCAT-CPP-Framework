@@ -85,12 +85,12 @@ clean: CMakeFiles/EC_PROJECT.dir/clean
 CMakeFiles/EC_PROJECT.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=1,2,3,4 "Built target EC_PROJECT"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target EC_PROJECT"
 .PHONY : CMakeFiles/EC_PROJECT.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/EC_PROJECT.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles 6
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/EC_PROJECT.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles 0
 .PHONY : CMakeFiles/EC_PROJECT.dir/rule
@@ -102,7 +102,7 @@ EC_PROJECT: CMakeFiles/EC_PROJECT.dir/rule
 # codegen rule for target.
 CMakeFiles/EC_PROJECT.dir/codegen:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target EC_PROJECT"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Finished codegen for target EC_PROJECT"
 .PHONY : CMakeFiles/EC_PROJECT.dir/codegen
 
 # clean rule for target.

@@ -16,7 +16,6 @@ public:
         void set_realtime_priority();
         void lock_memory();
         void stack_prefault();
-        void signal_handler(int sig);
         void timespec_add(struct timespec *result,
                           struct timespec *time1,
                           struct timespec *time2);

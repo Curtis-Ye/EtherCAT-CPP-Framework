@@ -19,6 +19,7 @@ add_executable(
   src/EtherCATMaster.cpp
   src/Joint.cpp
   src/RealtimeManager.cpp
+  src/JointConfig.cpp
 )
 
 target_include_directories(
