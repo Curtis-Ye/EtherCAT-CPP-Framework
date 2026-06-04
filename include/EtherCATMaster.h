@@ -2,6 +2,7 @@
 #include <ecrt.h>
 #include <vector>
 #include <time.h>
+#include "config.h"
 
 class EtherCATMaster
 {
@@ -18,6 +19,7 @@ public:
         void syncDC();
         uint8_t *getDomainPD();
         ec_master_t *getMaster_();
+        void setMasterTime();
 
 private:
         uint8_t *domain_pd_;

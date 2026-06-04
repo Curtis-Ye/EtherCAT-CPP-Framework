@@ -49,7 +49,7 @@ public:
 
 private:
     EtherCATMaster &ethercat_;
-    ec_slave_config_t *sc_;
+    ec_slave_config_t *sc_; // 从站配置后返回的一个ec_slave_config_t类型的指针，可以理解为从站的代号。
 
     uint16_t alias_ = 0;                 /* 从站别名        */
     uint16_t position_ = 0;              /* 从站在总线上的位置 */

@@ -1,5 +1,4 @@
 #include "EtherCATMaster.h"
-#include "config.h"
 
 bool EtherCATMaster::init()
 {
@@ -75,4 +74,11 @@ uint8_t *EtherCATMaster::getDomainPD()
 ec_master_t *EtherCATMaster::getMaster_()
 {
         return master_;
+}
+
+void EtherCATMaster::setMasterTime()
+{
+        struct timespec masterInitTime;
+        clock_gettime(CLOCK_MONOTONIC, &masterInitTime);
+        ecrt_master_application_time(master, TIMESPEC2NS(masterInitTime));
 }

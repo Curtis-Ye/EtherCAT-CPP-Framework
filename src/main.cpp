@@ -18,11 +18,13 @@
 #include <inttypes.h>
 #include "EtherCATMaster.h"
 #include "Joint.h"
+#include "RealtimeManager.h"
 #include "config.h"
 
 // ec_master_t *master;
 EtherCATMaster master0;
 Joint joint1(master0, 0);
+RealtimeManager manager0;
 std::vector<ec_pdo_entry_reg_t> regs;
 
 int main(int argc, char **argv)
@@ -32,12 +34,12 @@ int main(int argc, char **argv)
 
     /* ---- 1. 系统初始化 ---- */
 #ifdef SET_CPU_AFFINITY
-    set_cpu_affinity(4);
+    manager0.set_cpu_affinity(4);
 #endif
-    set_realtime_priority();
-    lock_memory();
-    stack_prefault();
-    signal(SIGINT, signal_handler);
+    manager0.set_realtime_priority();
+    manager0.lock_memory();
+    manager0.stack_prefault();
+    signal(SIGINT, manager0.signal_handler);
 
     /* ---- 2. EtherCAT 主站初始化 ---- */
 
@@ -78,11 +80,12 @@ int main(int argc, char **argv)
     joint1.dcConfig();
 
 #ifdef SYNC_REF_TO_MASTER
-    {
-        struct timespec masterInitTime;
-        clock_gettime(CLOCK_MONOTONIC, &masterInitTime);
-        ecrt_master_application_time(master, TIMESPEC2NS(masterInitTime));
-    }
+    // {
+    //     struct timespec masterInitTime;
+    //     clock_gettime(CLOCK_MONOTONIC, &masterInitTime);
+    //     ecrt_master_application_time(master, TIMESPEC2NS(masterInitTime));
+    // }
+    master0.setMasterTime();
 #endif
 
     // if (ecat_activate(master))
@@ -107,8 +110,10 @@ int main(int argc, char **argv)
 
         while (1)
         {
-            timespec_add(&wakeupTime, &wakeupTime, &cycleTime);
-            clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &wakeupTime, NULL);
+            // timespec_add(&wakeupTime, &wakeupTime, &cycleTime);
+            manager0.timespec_add(&wakeupTime, &wakeupTime, &cycleTime);
+            // clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &wakeupTime, NULL);
+            manager0.nanoSleep(&wakeupTime);
 
             // ecat_cycle_receive(master);
             // ecrt_slave_config_state(sc, &slaveState);
@@ -117,7 +122,7 @@ int main(int argc, char **argv)
 
             if (joint1.slaveState_.operational)
             {
-                printf("All slaves have reached OP state\n");
+                std::cout << "All slaves have reached OP state" << endl;
                 break;
             }
 
@@ -131,8 +136,6 @@ int main(int argc, char **argv)
     }
 
     /* ---- 4. 运动控制主循环 ---- */
-    // int32_t targetPos = 0;
-    // int32_t actTorque = 0, targetTorque = 0;
     struct timespec wakeupTime, sleepTime;
 
 #ifdef MEASURE_PERF
@@ -152,9 +155,10 @@ int main(int argc, char **argv)
 #endif
 
         /* 精确周期睡眠 */
-        timespec_add(&wakeupTime, &wakeupTime, &sleepTime);
-        clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &wakeupTime, NULL);
-
+        // timespec_add(&wakeupTime, &wakeupTime, &sleepTime);
+        manager0.timespec_add(&wakeupTime, &wakeupTime, &sleepTime);
+        // clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &wakeupTime, NULL);
+        manager0.nanoSleep(&wakeupTime);
         /* 接收帧 & 处理域数据 */
         // ecat_cycle_receive(master);
         // ecat_cycle_process(domain);
