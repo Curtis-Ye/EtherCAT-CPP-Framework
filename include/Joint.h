@@ -26,7 +26,8 @@ public:
     ec_slave_config_state_t slaveState_;
 
     Joint(EtherCATMaster &master, uint16_t Pos);
-    bool init(uint8_t mode);
+    void setMode(uint8_t mode);
+    bool init();
     bool jointConfig();
     bool PDOConfig();
     void dcConfig();
@@ -51,6 +52,7 @@ private:
     EtherCATMaster &ethercat_;
     ec_slave_config_t *sc_; // 从站配置后返回的一个ec_slave_config_t类型的指针，可以理解为从站的代号。
 
+    uint8_t mode_;
     uint16_t alias_ = 0;                 /* 从站别名        */
     uint16_t position_ = 0;              /* 从站在总线上的位置 */
     uint32_t vendor_id_ = 0x5a65726f;    /* 零售商 ID       */

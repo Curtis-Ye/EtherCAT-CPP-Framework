@@ -21,7 +21,6 @@
 #include "RealtimeManager.h"
 #include "config.h"
 
-// ec_master_t *master;
 EtherCATMaster master0;
 Joint joint1(master0, 0);
 RealtimeManager manager0(master0);
@@ -51,60 +50,42 @@ int main(int argc, char **argv)
     signal(SIGINT, signal_handler);
 
     /* ---- 2. EtherCAT 主站初始化 ---- */
-
-    // master = ecat_master_request();
-    // if (!master)
-    //     return -1;
     if (master0.init() == false)
     {
         return -1;
     }
 
-    // initDrive(master, 0, CST); // 初始化关节模组
-    joint1.init(CST);
+    joint1.setMode(CST);
+    joint1.init();
 
-    // ec_slave_config_t *sc = ecat_slave_config(master);
-    // if (!sc)
-    //     return -1;
     if (joint1.jointConfig() == false)
+    {
+        std::cout<<"jointConfig failed!"<<std::endl;
         return -1;
-
-    // if (ecat_config_pdos(sc))
-    //     return -1;
+    }
+        
     if (joint1.PDOConfig() == false)
+    {
+        std::cout<<"PDOConfig failed!"<<std::endl;
         return -1;
+    }
 
-    // ec_domain_t *domain = ecat_create_domain(master);
     master0.createDomain();
 
-    // printf("Activating master...\n");
     std::cout << "Activating master..." << std::endl;
 
-    // if (ecat_reg_pdo_entries(domain))
-    //     return -1;
     joint1.appendPdoRegs(regs);
     master0.regPDO2domain(regs);
 
-    // ecat_config_dc(sc);
     joint1.dcConfig();
 
 #ifdef SYNC_REF_TO_MASTER
-    // {
-    //     struct timespec masterInitTime;
-    //     clock_gettime(CLOCK_MONOTONIC, &masterInitTime);
-    //     ecrt_master_application_time(master, TIMESPEC2NS(masterInitTime));
-    // }
     master0.setMasterTime();
 #endif
 
-    // if (ecat_activate(master))
-    //     return -1;
     if (master0.activate() == false)
         return -1;
 
-    // uint8_t *domain_pd = ecat_domain_data(domain);
-    // if (!domain_pd)
-    //     return -1;
     if (master0.getDomainData() == false)
         return -1;
 
@@ -115,17 +96,11 @@ int main(int argc, char **argv)
         struct timespec wakeupTime;
         clock_gettime(CLOCK_MONOTONIC, &wakeupTime);
 
-        // ec_slave_config_state_t slaveState;
-
         while (1)
         {
-            // timespec_add(&wakeupTime, &wakeupTime, &cycleTime);
             manager0.timespec_add(&wakeupTime, &wakeupTime, &cycleTime);
-            // clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &wakeupTime, NULL);
             manager0.nanoSleep(&wakeupTime);
 
-            // ecat_cycle_receive(master);
-            // ecrt_slave_config_state(sc, &slaveState);
             master0.receive();
             joint1.getSlaveState();
 
@@ -135,23 +110,20 @@ int main(int argc, char **argv)
                 break;
             }
 
-            // ecrt_domain_queue(domain);
             master0.queueDomain();
-            // ecat_sync_dc(master);
             master0.syncDC();
-            // ecrt_master_send(master);
             master0.send();
         }
     }
 
     /* ---- 4. 运动控制主循环 ---- */
-    struct timespec wakeupTime, sleepTime;
+struct timespec wakeupTime, sleepTime;
 
 #ifdef MEASURE_PERF
     uint32_t t_cur, t_prev;
 #endif
 
-    sleepTime = cycleTime;
+    sleepTime = cycleTime; //1ms
     clock_gettime(CLOCK_MONOTONIC, &wakeupTime);
 
     while (1)
@@ -164,13 +136,9 @@ int main(int argc, char **argv)
 #endif
 
         /* 精确周期睡眠 */
-        // timespec_add(&wakeupTime, &wakeupTime, &sleepTime);
         manager0.timespec_add(&wakeupTime, &wakeupTime, &sleepTime);
-        // clock_nanosleep(CLOCK_MONOTONIC, TIMER_ABSTIME, &wakeupTime, NULL);
         manager0.nanoSleep(&wakeupTime);
         /* 接收帧 & 处理域数据 */
-        // ecat_cycle_receive(master);
-        // ecat_cycle_process(domain);
         master0.receive();
         master0.processDomain();
 
@@ -178,23 +146,16 @@ int main(int argc, char **argv)
         ecrt_master_reference_clock_time(master, &t_cur);
 #endif
 
-        /* --- CST 驱动状态机 --- */
-        // uint16_t state = driveStateMachine(statusWord, domain_pd,
-        //                                    offset_controlword,
-        //                                    offset_target_torque,
-        //                                    &targetTorque);
-
+        /* --- 驱动状态机 --- */
         joint1.enable();
-        // printf("targetTorque=%d actTorque=%d state=0x%04x\n",
-        //        targetTorque, actTorque, state);
-        joint1.setTargetTor(40);
+        if(joint1.isOperationEnabled())
+            joint1.setTargetTor(40);
+        
         /* 队列 & 发送 */
-        // ecat_cycle_queue_and_send(master, domain);
         master0.queueDomain();
         master0.send();
 
         /* DC 时钟同步 */
-        // ecat_sync_dc(master);
         master0.syncDC();
 
 #ifdef MEASURE_PERF
