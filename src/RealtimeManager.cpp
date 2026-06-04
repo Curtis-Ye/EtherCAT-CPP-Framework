@@ -13,7 +13,7 @@ void RealtimeManager::set_cpu_affinity(int cpu)
 
         if (sched_setaffinity(0, sizeof(set), &set))
         {
-                std::cout << "Setting CPU affinity failed!" << endl;
+                std::cout << "Setting CPU affinity failed!" << std::endl;
         }
 }
 
@@ -22,7 +22,7 @@ void RealtimeManager::set_realtime_priority()
         struct sched_param param = {};
         param.sched_priority = sched_get_priority_max(SCHED_FIFO);
         // printf("Using priority %i.\n", param.sched_priority);
-        std::cout << "Using priority:" << param.sched_priority << endl;
+        std::cout << "Using priority:" << param.sched_priority << std::endl;
         if (sched_setscheduler(0, SCHED_FIFO, &param) == -1)
         {
                 perror("sched_setscheduler failed\n");
@@ -33,7 +33,7 @@ void RealtimeManager::lock_memory()
 {
         if (mlockall(MCL_CURRENT | MCL_FUTURE) == -1)
         {
-                std::cout << "mlockall failed" << endl;
+                std::cout << "mlockall failed" << std::endl;
         }
 }
 
@@ -46,7 +46,7 @@ void RealtimeManager::stack_prefault()
 void RealtimeManager::signal_handler(int sig)
 {
         (void)sig;
-        std::cout << "Releasing master..." << endl;
+        std::cout << "Releasing master..." << std::endl;
         ecrt_release_master(ethercat_);
         pid_t pid = getpid();
         kill(pid, SIGKILL);

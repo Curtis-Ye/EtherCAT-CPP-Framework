@@ -27,7 +27,7 @@ bool Joint::jointConfig()
         ec_slave_config_t *temp = slaveConfig(ethercat_, alias, position0, vendor_id, product_code);
         sc_ = temp;
         if (!sc_)
-                printf("Failed to get slave configuration\n");
+                std::cout << "Failed to get slave configuration" << std::endl;
         return false;
 }
 
@@ -36,7 +36,7 @@ bool Joint::PDOConfig()
 #ifdef CONFIG_PDOS
         if (ecrt_slave_config_pdos(sc_, EC_END, slave_0_syncs))
         {
-                printf("Failed to configure slave PDOs\n");
+                std::cout << "Failed to configure slave PDOs" << std::endl;
                 return false;
         }
 #endif
@@ -173,27 +173,27 @@ void Joint::enable()
         if (isFault())
         {
                 control_word_ = 0x0080;
-                std::cout << "Fault state, sending reset command" << endl;
+                std::cout << "Fault state, sending reset command" << std::endl;
         }
         else if (isSwitchOnDisabled())
         {
                 control_word_ = 0x0006;
-                std::cout << "Switch on disabled, sending shutdown command" << endl;
+                std::cout << "Switch on disabled, sending shutdown command" << std::endl;
         }
         else if (isReadyToSwitchOn())
         {
                 control_word_ = 0x0007;
-                std::cout << "Ready to switch on, sending switch on command" << endl;
+                std::cout << "Ready to switch on, sending switch on command" << std::endl;
         }
         else if (isSwitchedOn())
         {
                 control_word_ = 0x000F;
-                std::cout << "Switched on, sending enable operation command" << endl;
+                std::cout << "Switched on, sending enable operation command" << std::endl;
         }
         else if (isOperationEnabled())
         {
                 control_word_ = 0x000F;
-                std::cout << "Operating..." << endl;
+                std::cout << "Operating..." << std::endl;
         }
         EC_WRITE_U16(ethercat_->getDomainPD() + offset_controlword, control_word_);
 }
@@ -202,7 +202,7 @@ void Joint::setTargetPos(int32_t position)
 {
         EC_WRITE_S32(ethercat_->getDomainPD() + offset_target_position, position);
 #ifdef SHOW_PARAM
-        std::cout << "TargetPos:" << position << endl;
+        std::cout << "TargetPos:" << position << std::endl;
 #endif
 }
 
@@ -210,7 +210,7 @@ void Joint::setTargetVel(int32_t velocity)
 {
         EC_WRITE_S32(ethercat_->getDomainPD() + offset_target_velocity, velocity);
 #ifdef SHOW_PARAM
-        std::cout << "TargetVel:" << velocity << endl;
+        std::cout << "TargetVel:" << velocity << std::endl;
 #endif
 }
 
@@ -218,6 +218,6 @@ void Joint::setTargetTor(int32_t torque)
 {
         EC_WRITE_S16(ethercat_->getDomainPD() + offset_target_torque, torque);
 #ifdef SHOW_PARAM
-        std::cout << "TargetTor:" << torque << endl;
+        std::cout << "TargetTor:" << torque << std::endl;
 #endif
 }

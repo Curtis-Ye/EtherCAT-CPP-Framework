@@ -24,7 +24,7 @@
 // ec_master_t *master;
 EtherCATMaster master0;
 Joint joint1(master0, 0);
-RealtimeManager manager0;
+RealtimeManager manager0(master0);
 std::vector<ec_pdo_entry_reg_t> regs;
 
 int main(int argc, char **argv)
@@ -122,7 +122,7 @@ int main(int argc, char **argv)
 
             if (joint1.slaveState_.operational)
             {
-                std::cout << "All slaves have reached OP state" << endl;
+                std::cout << "All slaves have reached OP state" << std::endl;
                 break;
             }
 
