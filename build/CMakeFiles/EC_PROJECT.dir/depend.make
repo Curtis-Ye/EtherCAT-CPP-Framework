@@ -1,2 +1,2 @@
-# Empty dependencies file for CSP_PROJECT.
+# Empty dependencies file for EC_PROJECT.
 # This may be replaced when dependencies are built.

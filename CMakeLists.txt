@@ -14,19 +14,17 @@ include_directories(
 )
 
 add_executable(
-  CSP_PROJECT
+  EC_PROJECT
   src/main.cpp
-  src/csp_util.cpp
-  src/ecat_config.cpp
-  src/ecat_master.cpp
-  src/cst_control.cpp
+  src/EtherCATMaster.cpp
+  src/Joint.cpp
 )
 
 target_include_directories(
-  CSP_PROJECT
+  EC_PROJECT
   PRIVATE
   ${ETHERLAB_DIR}/include
   ${CMAKE_SOURCE_DIR}/include
 )
 
-target_link_libraries(CSP_PROJECT ${ETHERCAT_LIB})
+target_link_libraries(EC_PROJECT ${ETHERCAT_LIB})

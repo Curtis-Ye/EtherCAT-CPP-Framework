@@ -57,10 +57,10 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST
+CMAKE_SOURCE_DIR = /home/curtis/EtherCAT-CPP-Framework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build
+CMAKE_BINARY_DIR = /home/curtis/EtherCAT-CPP-Framework/build
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -87,9 +87,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build/CMakeFiles /home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles /home/curtis/EtherCAT-CPP-Framework/build//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -117,120 +117,72 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named CSP_PROJECT
+# Target rules for targets named EC_PROJECT
 
 # Build rule for target.
-CSP_PROJECT: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CSP_PROJECT
-.PHONY : CSP_PROJECT
+EC_PROJECT: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 EC_PROJECT
+.PHONY : EC_PROJECT
 
 # fast build rule for target.
-CSP_PROJECT/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/build
-.PHONY : CSP_PROJECT/fast
+EC_PROJECT/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/build
+.PHONY : EC_PROJECT/fast
 
-src/csp_util.o: src/csp_util.cpp.o
-.PHONY : src/csp_util.o
-
-# target to build an object file
-src/csp_util.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/csp_util.cpp.o
-.PHONY : src/csp_util.cpp.o
-
-src/csp_util.i: src/csp_util.cpp.i
-.PHONY : src/csp_util.i
-
-# target to preprocess a source file
-src/csp_util.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/csp_util.cpp.i
-.PHONY : src/csp_util.cpp.i
-
-src/csp_util.s: src/csp_util.cpp.s
-.PHONY : src/csp_util.s
-
-# target to generate assembly for a file
-src/csp_util.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/csp_util.cpp.s
-.PHONY : src/csp_util.cpp.s
-
-src/cst_control.o: src/cst_control.cpp.o
-.PHONY : src/cst_control.o
+src/EtherCATMaster.o: src/EtherCATMaster.cpp.o
+.PHONY : src/EtherCATMaster.o
 
 # target to build an object file
-src/cst_control.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/cst_control.cpp.o
-.PHONY : src/cst_control.cpp.o
+src/EtherCATMaster.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/EtherCATMaster.cpp.o
+.PHONY : src/EtherCATMaster.cpp.o
 
-src/cst_control.i: src/cst_control.cpp.i
-.PHONY : src/cst_control.i
+src/EtherCATMaster.i: src/EtherCATMaster.cpp.i
+.PHONY : src/EtherCATMaster.i
 
 # target to preprocess a source file
-src/cst_control.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/cst_control.cpp.i
-.PHONY : src/cst_control.cpp.i
+src/EtherCATMaster.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/EtherCATMaster.cpp.i
+.PHONY : src/EtherCATMaster.cpp.i
 
-src/cst_control.s: src/cst_control.cpp.s
-.PHONY : src/cst_control.s
+src/EtherCATMaster.s: src/EtherCATMaster.cpp.s
+.PHONY : src/EtherCATMaster.s
 
 # target to generate assembly for a file
-src/cst_control.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/cst_control.cpp.s
-.PHONY : src/cst_control.cpp.s
+src/EtherCATMaster.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/EtherCATMaster.cpp.s
+.PHONY : src/EtherCATMaster.cpp.s
 
-src/ecat_config.o: src/ecat_config.cpp.o
-.PHONY : src/ecat_config.o
+src/Joint.o: src/Joint.cpp.o
+.PHONY : src/Joint.o
 
 # target to build an object file
-src/ecat_config.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/ecat_config.cpp.o
-.PHONY : src/ecat_config.cpp.o
+src/Joint.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.o
+.PHONY : src/Joint.cpp.o
 
-src/ecat_config.i: src/ecat_config.cpp.i
-.PHONY : src/ecat_config.i
-
-# target to preprocess a source file
-src/ecat_config.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/ecat_config.cpp.i
-.PHONY : src/ecat_config.cpp.i
-
-src/ecat_config.s: src/ecat_config.cpp.s
-.PHONY : src/ecat_config.s
-
-# target to generate assembly for a file
-src/ecat_config.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/ecat_config.cpp.s
-.PHONY : src/ecat_config.cpp.s
-
-src/ecat_master.o: src/ecat_master.cpp.o
-.PHONY : src/ecat_master.o
-
-# target to build an object file
-src/ecat_master.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/ecat_master.cpp.o
-.PHONY : src/ecat_master.cpp.o
-
-src/ecat_master.i: src/ecat_master.cpp.i
-.PHONY : src/ecat_master.i
+src/Joint.i: src/Joint.cpp.i
+.PHONY : src/Joint.i
 
 # target to preprocess a source file
-src/ecat_master.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/ecat_master.cpp.i
-.PHONY : src/ecat_master.cpp.i
+src/Joint.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.i
+.PHONY : src/Joint.cpp.i
 
-src/ecat_master.s: src/ecat_master.cpp.s
-.PHONY : src/ecat_master.s
+src/Joint.s: src/Joint.cpp.s
+.PHONY : src/Joint.s
 
 # target to generate assembly for a file
-src/ecat_master.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/ecat_master.cpp.s
-.PHONY : src/ecat_master.cpp.s
+src/Joint.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.s
+.PHONY : src/Joint.cpp.s
 
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
 # target to build an object file
 src/main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/main.cpp.o
 .PHONY : src/main.cpp.o
 
 src/main.i: src/main.cpp.i
@@ -238,7 +190,7 @@ src/main.i: src/main.cpp.i
 
 # target to preprocess a source file
 src/main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/main.cpp.i
 .PHONY : src/main.cpp.i
 
 src/main.s: src/main.cpp.s
@@ -246,7 +198,7 @@ src/main.s: src/main.cpp.s
 
 # target to generate assembly for a file
 src/main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/src/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
 # Help Target
@@ -257,19 +209,13 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... CSP_PROJECT"
-	@echo "... src/csp_util.o"
-	@echo "... src/csp_util.i"
-	@echo "... src/csp_util.s"
-	@echo "... src/cst_control.o"
-	@echo "... src/cst_control.i"
-	@echo "... src/cst_control.s"
-	@echo "... src/ecat_config.o"
-	@echo "... src/ecat_config.i"
-	@echo "... src/ecat_config.s"
-	@echo "... src/ecat_master.o"
-	@echo "... src/ecat_master.i"
-	@echo "... src/ecat_master.s"
+	@echo "... EC_PROJECT"
+	@echo "... src/EtherCATMaster.o"
+	@echo "... src/EtherCATMaster.i"
+	@echo "... src/EtherCATMaster.s"
+	@echo "... src/Joint.o"
+	@echo "... src/Joint.i"
+	@echo "... src/Joint.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

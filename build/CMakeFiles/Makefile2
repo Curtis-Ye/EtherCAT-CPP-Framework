@@ -54,20 +54,20 @@ RM = /usr/local/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST
+CMAKE_SOURCE_DIR = /home/curtis/EtherCAT-CPP-Framework
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build
+CMAKE_BINARY_DIR = /home/curtis/EtherCAT-CPP-Framework/build
 
 #=============================================================================
 # Directory level rules for the build root directory
 
 # The main recursive "all" target.
-all: CMakeFiles/CSP_PROJECT.dir/all
+all: CMakeFiles/EC_PROJECT.dir/all
 .PHONY : all
 
 # The main recursive "codegen" target.
-codegen: CMakeFiles/CSP_PROJECT.dir/codegen
+codegen: CMakeFiles/EC_PROJECT.dir/codegen
 .PHONY : codegen
 
 # The main recursive "preinstall" target.
@@ -75,40 +75,40 @@ preinstall:
 .PHONY : preinstall
 
 # The main recursive "clean" target.
-clean: CMakeFiles/CSP_PROJECT.dir/clean
+clean: CMakeFiles/EC_PROJECT.dir/clean
 .PHONY : clean
 
 #=============================================================================
-# Target rules for target CMakeFiles/CSP_PROJECT.dir
+# Target rules for target CMakeFiles/EC_PROJECT.dir
 
 # All Build rule for target.
-CMakeFiles/CSP_PROJECT.dir/all:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/depend
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target CSP_PROJECT"
-.PHONY : CMakeFiles/CSP_PROJECT.dir/all
+CMakeFiles/EC_PROJECT.dir/all:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/depend
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=1,2,3,4 "Built target EC_PROJECT"
+.PHONY : CMakeFiles/EC_PROJECT.dir/all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/CSP_PROJECT.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build/CMakeFiles 6
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/CSP_PROJECT.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build/CMakeFiles 0
-.PHONY : CMakeFiles/CSP_PROJECT.dir/rule
+CMakeFiles/EC_PROJECT.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles 4
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/EC_PROJECT.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles 0
+.PHONY : CMakeFiles/EC_PROJECT.dir/rule
 
 # Convenience name for target.
-CSP_PROJECT: CMakeFiles/CSP_PROJECT.dir/rule
-.PHONY : CSP_PROJECT
+EC_PROJECT: CMakeFiles/EC_PROJECT.dir/rule
+.PHONY : EC_PROJECT
 
 # codegen rule for target.
-CMakeFiles/CSP_PROJECT.dir/codegen:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/codegen
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/build/CMakeFiles --progress-num=1,2,3,4,5,6 "Finished codegen for target CSP_PROJECT"
-.PHONY : CMakeFiles/CSP_PROJECT.dir/codegen
+CMakeFiles/EC_PROJECT.dir/codegen:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/codegen
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --progress-dir=/home/curtis/EtherCAT-CPP-Framework/build/CMakeFiles --progress-num=1,2,3,4 "Finished codegen for target EC_PROJECT"
+.PHONY : CMakeFiles/EC_PROJECT.dir/codegen
 
 # clean rule for target.
-CMakeFiles/CSP_PROJECT.dir/clean:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/CSP_PROJECT.dir/build.make CMakeFiles/CSP_PROJECT.dir/clean
-.PHONY : CMakeFiles/CSP_PROJECT.dir/clean
+CMakeFiles/EC_PROJECT.dir/clean:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/EC_PROJECT.dir/build.make CMakeFiles/EC_PROJECT.dir/clean
+.PHONY : CMakeFiles/EC_PROJECT.dir/clean
 
 #=============================================================================
 # Special targets to cleanup operation of make.

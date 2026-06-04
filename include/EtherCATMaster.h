@@ -1,5 +1,5 @@
 #pragma once
-#include <erct.h>
+#include <ecrt.h>
 #include <vector>
 #include <time.h>
 
@@ -17,6 +17,7 @@ public:
         bool regPDO2domain(const std::vector<ec_pdo_entry_reg_t> &domain_regs);
         void syncDC();
         uint8_t *getDomainPD();
+        ec_master_t *getMaster_();
 
 private:
         uint8_t *domain_pd_;

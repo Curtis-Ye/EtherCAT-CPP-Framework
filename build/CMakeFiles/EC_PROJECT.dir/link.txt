@@ -1,0 +1,1 @@
+/usr/bin/c++ -g CMakeFiles/EC_PROJECT.dir/src/main.cpp.o CMakeFiles/EC_PROJECT.dir/src/EtherCATMaster.cpp.o CMakeFiles/EC_PROJECT.dir/src/Joint.cpp.o -o EC_PROJECT  -Wl,-rpath,/usr/local/etherlab/lib /usr/local/etherlab/lib/libethercat.so

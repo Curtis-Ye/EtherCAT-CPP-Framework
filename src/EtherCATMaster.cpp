@@ -71,3 +71,8 @@ uint8_t *EtherCATMaster::getDomainPD()
 {
         return domain_pd_;
 }
+
+ec_master_t *EtherCATMaster::getMaster_()
+{
+        return master_;
+}

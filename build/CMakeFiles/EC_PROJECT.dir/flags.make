@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/usr/local/etherlab/include -I/home/curtis/ZeroErr_project/ZeroErr_IGH_EtherCAT_CST_Mode/src/CST/include
+CXX_INCLUDES = -I/usr/local/etherlab/include -I/home/curtis/EtherCAT-CPP-Framework/include
 
 CXX_FLAGS = -g
 
